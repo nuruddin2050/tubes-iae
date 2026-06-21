@@ -1,0 +1,92 @@
+services:
+  # --- 1. LOGIN SERVICE (Postgres) ---
+  db_login:
+    image: postgres:15
+    container_name: db_login
+    environment:
+      POSTGRES_DB: db_login
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_login"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- 2. PRODUCT SERVICE (Postgres) ---
+  db_product:
+    image: postgres:15
+    container_name: db_product
+    environment:
+      POSTGRES_DB: db_product
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_product"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- 3. ORDER SERVICE (Postgres) ---
+  db_order:
+    image: postgres:15
+    container_name: db_order
+    environment:
+      POSTGRES_DB: db_order
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_order"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- 4. PAYMENT SERVICE (Postgres) ---
+  db_payment:
+    image: postgres:15
+    container_name: db_payment
+    environment:
+      POSTGRES_DB: db_payment
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_payment"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- 5. NOTIFICATION SERVICE (Postgres) ---
+  db_notification:
+    image: postgres:15
+    container_name: db_notification
+    environment:
+      POSTGRES_DB: db_notification
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_notification"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- 6. HASURA GRAPHQL ENGINE ---
+  hasura-gateway:
+    image: hasura/graphql-engine:v2.33.0
+    container_name: hasura_gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      db_login:
+        condition: service_healthy
+      db_product:
+        condition: service_healthy
+      db_order:
+        condition: service_healthy
+      db_payment:
+        condition: service_healthy
+      db_notification:
+        condition: service_healthy
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:root@db_login:5432/db_login
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"

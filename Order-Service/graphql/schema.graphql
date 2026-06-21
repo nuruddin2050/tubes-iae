@@ -1,0 +1,55 @@
+"""
+GraphQL schema for Order Service (Lighthouse)
+"""
+
+type Query {
+  orders: [Order!]! @field(resolver: "App\\GraphQL\\Resolvers\\OrdersResolver@orders")
+  order(id: ID!): Order @field(resolver: "App\\GraphQL\\Resolvers\\OrdersResolver@order")
+}
+
+type Mutation {
+  createOrder(user_id: Int!, items: [CreateOrderItemInput!]!): Order!
+    @field(resolver: "App\\GraphQL\\Resolvers\\OrdersResolver@createOrder")
+
+  updateOrderStatus(id: ID!, status: OrderStatus!): Order!
+    @field(resolver: "App\\GraphQL\\Resolvers\\OrdersResolver@updateOrderStatus")
+}
+
+
+enum OrderStatus {
+  pending
+  paid
+  processing
+  shipped
+  completed
+  cancelled
+}
+
+type Order {
+  id: ID!
+  order_code: String!
+  user_id: Int!
+  status: OrderStatus!
+  subtotal: Float!
+  total_price: Float!
+  created_at: String!
+  updated_at: String!
+  items: [OrderItem!]!
+}
+
+type OrderItem {
+  id: ID!
+  product_id: Int!
+  product_name: String!
+  price: Float!
+  quantity: Int!
+  subtotal: Float!
+}
+
+input CreateOrderItemInput {
+  product_id: Int!
+  product_name: String!
+  price: Float!
+  quantity: Int!
+}
+

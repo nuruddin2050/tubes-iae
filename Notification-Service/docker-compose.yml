@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # 1. Message Broker yang dipakai bareng-bareng
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  # 2. Service Notifikasi Punya Kamu
+  notification-service:
+    build: ./bajamas-notification-service
+    ports:
+      - "8001:80"
+    depends_on:
+      - redis
+
+  # 3. Service Order Punya Temanmu, dst...

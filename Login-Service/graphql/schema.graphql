@@ -1,0 +1,34 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    role: String!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+type Query {
+    user(id: ID! @eq): User @find
+    users: [User!]! @all
+}
+
+type Mutation {
+    createUser(
+        name: String!
+        email: String!
+        password: String!
+        role: String!
+    ): User @create
+
+    # ID pada @update tidak perlu @eq karena @update sudah mendeteksi PK secara otomatis
+    updateUser(
+        id: ID!
+        name: String
+        role: String
+    ): User @update(model: "App\\Models\\User")
+
+    # Samakan penggunaan @eq di sini agar konsisten dengan Query
+    deleteUser(id: ID! @eq): User @softDelete
+}

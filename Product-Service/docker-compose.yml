@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  product-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bajamas_product_app
+    ports:
+      - "8001:80" # Akses API di http://localhost:8001
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - product-db
+
+  product-db:
+    image: mysql:8.0
+    container_name: bajamas_product_db
+    ports:
+      - "33061:3306" # Menggunakan port 33061 agar tidak bentrok dengan MySQL lokal komputermu
+    environment:
+      MYSQL_DATABASE: product_db
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - product_db_data:/var/lib/mysql
+
+volumes:
+  product_db_data:
