@@ -72,7 +72,7 @@ class OrderService
 
             $order = Order::create([
                 'order_code' => $orderCode,
-                'user_id' => (int) $payload['user_id'],
+                'user_id' => $payload['user_id'],
                 'status' => 'pending',
                 'subtotal' => $this->roundMoney($orderSubtotal),
                 'total_price' => $this->roundMoney($orderSubtotal),
@@ -112,7 +112,7 @@ class OrderService
         return Order::with('items')->findOrFail($id);
     }
 
-    public function getOrdersByUser(int $userId): EloquentCollection
+    public function getOrdersByUser(string $userId): EloquentCollection
     {
         return Order::with('items')
             ->where('user_id', $userId)
@@ -152,7 +152,7 @@ class OrderService
         });
     }
 
-    public function getHistory(int $userId): EloquentCollection
+    public function getHistory(string $userId): EloquentCollection
     {
         return Order::with('items')
             ->where('user_id', $userId)

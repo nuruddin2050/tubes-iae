@@ -772,9 +772,86 @@ function saveConfigSettings(e) {
 }
 
 // ----------------------------------------------------
+// SYSTEM BOOT INTRO SEQUENCE
+// ----------------------------------------------------
+function runBootSequence() {
+    const introScreen = document.getElementById('intro-screen');
+    const progressBar = document.getElementById('intro-progress-bar');
+    const percentageText = document.getElementById('intro-percentage');
+    const ticker = document.getElementById('intro-status-ticker');
+
+    if (!introScreen) return;
+
+    // Initially hide the main app content with a fade effect
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+        appContainer.style.opacity = '0';
+        appContainer.style.transition = 'opacity 0.8s ease-in-out';
+    }
+
+    let progress = 0;
+    const interval = setInterval(() => {
+        // Variable progress rate to feel like authentic systems loading
+        let increment = Math.floor(Math.random() * 4) + 1; // 1-4%
+        if (progress > 20 && progress < 35) increment = Math.random() > 0.4 ? 1 : 0; // slow down for Hasura gateway connection
+        if (progress > 50 && progress < 65) increment = Math.random() > 0.3 ? 2 : 1; // microservice check
+        if (progress > 85) increment = 1; // crawl towards finish line
+
+        progress += increment;
+        if (progress > 100) progress = 100;
+
+        if (progressBar) progressBar.style.width = `${progress}%`;
+        if (percentageText) percentageText.textContent = `${progress}%`;
+
+        // Typewriter dynamic status messages based on current completion
+        if (ticker) {
+            if (progress < 12) {
+                ticker.textContent = "» Preparing sustainable catalog environment...";
+            } else if (progress < 25) {
+                ticker.textContent = "» Rooting organic botanical nodes...";
+            } else if (progress < 40) {
+                ticker.textContent = "» Feeding connection pools to Login-Service (Port 8000)...";
+            } else if (progress < 55) {
+                ticker.textContent = "» Sprouting product assets from Product-Service (Port 8001)...";
+            } else if (progress < 70) {
+                ticker.textContent = "» Nurturing transaction flows on Order-Service (Port 8002)...";
+            } else if (progress < 82) {
+                ticker.textContent = "» Syncing PostgreSQL database soil layers...";
+            } else if (progress < 92) {
+                ticker.textContent = "» Watering notification listeners via RabbitMQ...";
+            } else if (progress < 100) {
+                ticker.textContent = "» Harvesting security authorization keys...";
+            } else {
+                ticker.textContent = "» BAJAMAS Sustainable E-Commerce: Ready.";
+            }
+        }
+
+        if (progress === 100) {
+            clearInterval(interval);
+            
+            // Short delay after completing boot to display the success message
+            setTimeout(() => {
+                introScreen.classList.add('fade-out');
+                if (appContainer) {
+                    appContainer.style.opacity = '1';
+                }
+                
+                // Cleanup screen element after animation ends
+                setTimeout(() => {
+                    introScreen.remove();
+                }, 800);
+            }, 800);
+        }
+    }, 45); // Takes approx. 3.5 - 4.5 seconds to complete
+}
+
+// ----------------------------------------------------
 // BOOTSTRAP INITIALIZATION
 // ----------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
+    // Run badass intro sequence
+    runBootSequence();
+
     // Add toast container dynamically
     if (!document.getElementById('toast-container')) {
         const container = document.createElement('div');

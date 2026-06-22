@@ -4,60 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BAJAMAS E-Commerce - Enterprise Application Integration Portal</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bef264' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.2a7 7 0 0 1-9 8.8Z'/%3E%3Cpath d='M19 2c-2.26 4.33-5.27 7.14-8 10'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Cinematic Bootup Intro Screen -->
+    <div id="intro-screen">
+        <div class="intro-bg-gradient"></div>
+        <div class="intro-grid-overlay"></div>
+        <div class="intro-container">
+            <div class="intro-emblem-wrapper">
+                <div class="intro-emblem">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.2a7 7 0 0 1-9 8.8Z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>
+                </div>
+            </div>
+            
+            <div class="intro-brand">
+                <h1 class="intro-title">BAJAMAS</h1>
+                <span class="intro-subtitle">SYSTEM INTEGRATION PORTAL</span>
+            </div>
+            
+            <div class="intro-loader-box">
+                <div class="status-ticker" id="intro-status-ticker">INITIATING BOOT PROCESS...</div>
+                <div class="intro-progress-container">
+                    <div class="intro-progress-bar" id="intro-progress-bar"></div>
+                </div>
+                <div class="intro-percentage" id="intro-percentage">0%</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Application UI -->
     <div class="app-container">
         
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <!-- Header Navigation Bar -->
+        <header class="navbar">
             <div class="brand-section">
                 <div class="brand-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.2a7 7 0 0 1-9 8.8Z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>
                 </div>
                 <div>
                     <h1 class="brand-title">BAJAMAS</h1>
-                    <span class="brand-subtitle">Integration Portal</span>
+                    <span class="brand-subtitle">Sustainable Portal</span>
                 </div>
             </div>
 
             <ul class="nav-links">
                 <li>
                     <a class="nav-link active" data-view="marketplace">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
                         Marketplace
                     </a>
                 </li>
                 <li>
                     <a class="nav-link" data-view="cart">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                         Keranjang
-                        <span class="status-pill status-online cart-badge" style="margin-left: auto; font-size: 0.65rem; padding: 0.15rem 0.45rem;">0</span>
+                        <span class="status-pill status-online cart-badge" style="display: none;">0</span>
                     </a>
                 </li>
                 <li>
                     <a class="nav-link" data-view="orders">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
                         Pesanan Saya
                     </a>
                 </li>
                 <li>
                     <a class="nav-link" data-view="notifications">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
                         Notifikasi
                     </a>
                 </li>
                 <li>
                     <a class="nav-link" data-view="status">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/></svg>
                         Status Sistem
                     </a>
                 </li>
             </ul>
 
-            <!-- Sidebar Footer User Profile -->
+            <!-- Topbar Right User Profile Widget -->
             <div class="user-widget" id="sidebar-user-widget" style="display: none;">
                 <div class="avatar" id="user-avatar">NB</div>
                 <div class="user-info">
@@ -68,7 +90,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
                 </button>
             </div>
-        </aside>
+        </header>
 
         <!-- Main Display Content Area -->
         <main class="main-content">
@@ -81,10 +103,10 @@
                     <div class="glass-card auth-card" id="auth-login-card">
                         <div class="auth-header">
                             <div class="brand-icon" style="margin: 0 auto 1rem auto;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.2a7 7 0 0 1-9 8.8Z"/><path d="M19 2c-2.26 4.33-5.27 7.14-8 10"/></svg>
                             </div>
                             <h2>Selamat Datang</h2>
-                            <p class="auth-subtitle">BAJAMAS E-Commerce Integration Portal</p>
+                            <p class="auth-subtitle">BAJAMAS E-Commerce Sustainable Portal</p>
                         </div>
                         
                         <form id="login-form">
@@ -152,6 +174,29 @@
                     <div class="search-box">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                         <input type="text" id="catalog-search" class="form-control" placeholder="Cari kemasan ramah lingkungan...">
+                    </div>
+                </div>
+
+                <!-- Premium Hero Section Banner -->
+                <div class="marketplace-hero glass-card">
+                    <div class="hero-content">
+                        <span class="hero-tag">Bajamas 2.0 Eco Portal</span>
+                        <h1 class="hero-title">Intelligence that <span class="organic-italic">grows</span> with you.</h1>
+                        <p class="hero-subtitle">The all-in-one packaging marketplace for enterprises who demand clarity, speed, and sustainable growth.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="document.querySelector('.filter-pills').scrollIntoView({ behavior: 'smooth' })">
+                                Explore Catalog
+                            </button>
+                            <button class="btn btn-secondary" onclick="switchView('status')">
+                                System Monitor
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="visual-glow"></div>
+                        <div class="visual-image-container">
+                            <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=600" alt="Sustainable Plants and Organic Package" class="hero-leaf-img">
+                        </div>
                     </div>
                 </div>
 

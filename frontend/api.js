@@ -170,10 +170,19 @@ const Api = {
     async login(email, password) {
         const config = getConfig();
         if (config.mockMode) {
-            return {
-                user: { id: 1, name: "Nuruddin Bajamas", email, role: "customer" },
-                token: "mock-jwt-token-12345"
-            };
+            if (email === "user@bajamas.com" && password === "password123") {
+                return {
+                    user: { id: 1, name: "Nuruddin Bajamas", email, role: "customer" },
+                    token: "mock-jwt-token-12345"
+                };
+            } else if (email === "admin@bajamas.com" && password === "admin123") {
+                return {
+                    user: { id: 2, name: "Admin Bajamas", email, role: "admin" },
+                    token: "mock-jwt-token-67890"
+                };
+            } else {
+                throw new Error("Email atau password mock salah. (Hint: user@bajamas.com / password123)");
+            }
         }
 
         // Call the actual REST API: POST /api/auth/login

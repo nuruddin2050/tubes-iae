@@ -1,0 +1,141 @@
+{
+  "type": "bulk",
+  "args": [
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "db_product",
+        "table": { "schema": "public", "name": "products" },
+        "name": "category",
+        "using": {
+          "manual_configuration": {
+            "remote_table": { "schema": "public", "name": "categories" },
+            "column_mapping": { "category_id": "id" }
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "db_product",
+        "table": { "schema": "public", "name": "categories" },
+        "name": "products",
+        "using": {
+          "manual_configuration": {
+            "remote_table": { "schema": "public", "name": "products" },
+            "column_mapping": { "id": "category_id" }
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_object_relationship",
+      "args": {
+        "source": "db_order",
+        "table": { "schema": "public", "name": "order_items" },
+        "name": "order",
+        "using": {
+          "manual_configuration": {
+            "remote_table": { "schema": "public", "name": "orders" },
+            "column_mapping": { "order_id": "id" }
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_array_relationship",
+      "args": {
+        "source": "db_order",
+        "table": { "schema": "public", "name": "orders" },
+        "name": "items",
+        "using": {
+          "manual_configuration": {
+            "remote_table": { "schema": "public", "name": "order_items" },
+            "column_mapping": { "id": "order_id" }
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_remote_relationship",
+      "args": {
+        "source": "db_order",
+        "table": { "schema": "public", "name": "orders" },
+        "name": "user",
+        "definition": {
+          "to_source": {
+            "source": "db_login",
+            "table": { "schema": "public", "name": "users" },
+            "field_mapping": { "user_id": "id" },
+            "relationship_type": "object"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_remote_relationship",
+      "args": {
+        "source": "db_order",
+        "table": { "schema": "public", "name": "order_items" },
+        "name": "product",
+        "definition": {
+          "to_source": {
+            "source": "db_product",
+            "table": { "schema": "public", "name": "products" },
+            "field_mapping": { "product_id": "id" },
+            "relationship_type": "object"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_remote_relationship",
+      "args": {
+        "source": "db_payment",
+        "table": { "schema": "public", "name": "payments" },
+        "name": "order",
+        "definition": {
+          "to_source": {
+            "source": "db_order",
+            "table": { "schema": "public", "name": "orders" },
+            "field_mapping": { "order_id": "id" },
+            "relationship_type": "object"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_remote_relationship",
+      "args": {
+        "source": "db_notification",
+        "table": { "schema": "public", "name": "notifications" },
+        "name": "user",
+        "definition": {
+          "to_source": {
+            "source": "db_login",
+            "table": { "schema": "public", "name": "users" },
+            "field_mapping": { "user_id": "id" },
+            "relationship_type": "object"
+          }
+        }
+      }
+    },
+    {
+      "type": "pg_create_remote_relationship",
+      "args": {
+        "source": "db_notification",
+        "table": { "schema": "public", "name": "notifications" },
+        "name": "order",
+        "definition": {
+          "to_source": {
+            "source": "db_order",
+            "table": { "schema": "public", "name": "orders" },
+            "field_mapping": { "order_id": "id" },
+            "relationship_type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

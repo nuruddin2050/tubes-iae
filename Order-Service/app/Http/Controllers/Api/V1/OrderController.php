@@ -91,14 +91,14 @@ class OrderController extends Controller
     }
 
     // Keep methods expected by routes/api.php
-    public function userOrders(int $userId): JsonResponse
+    public function userOrders(string $userId): JsonResponse
     {
         return response()->json([
             'data' => $this->orderService->getOrdersByUser($userId),
         ]);
     }
 
-    public function history(int $userId): JsonResponse
+    public function history(string $userId): JsonResponse
     {
         return response()->json([
             'data' => $this->orderService->getHistory($userId),

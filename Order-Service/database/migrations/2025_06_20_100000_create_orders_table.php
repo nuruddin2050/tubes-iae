@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id(); 
             $table->string('order_code')->unique();
-            $table->unsignedBigInteger('user_id'); 
+            $table->uuid('user_id'); 
             $table->decimal('subtotal', 15, 2)->default(0.00);
             $table->decimal('total_price', 15, 2); 
             $table->string('status')->default('pending');
