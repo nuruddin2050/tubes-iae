@@ -1,0 +1,56 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: payment_service_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  db:
+    image: mysql:8.0
+    container_name: payment_service_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3307:3306"
+    volumes:
+      - payment_db_data:/var/lib/mysql
+
+  # --- TAMBAHAN UNTUK HASURA ---
+  hasura:
+    image: hasura/graphql-engine:v2.33.0
+    container_name: payment_service_hasura
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - hasura_metadata
+    environment:
+      # Hasura butuh Postgres kecil-kecilan untuk menyimpan settingannya sendiri
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:hasurapassword@hasura_metadata:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+
+  hasura_metadata:
+    image: postgres:15
+    container_name: payment_service_hasura_metadata
+    environment:
+      POSTGRES_PASSWORD: hasurapassword
+    volumes:
+      - hasura_metadata_data:/var/lib/postgresql/data
+
+volumes:
+  payment_db_data:
+  # Tambahkan volume baru ini di baris paling bawah:
+  hasura_metadata_data:
