@@ -2,17 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
-    // Mengizinkan kolom ini diisi saat insert/update
-    protected $fillable = ['category_id', 'name', 'slug', 'description', 'price', 'stock'];
+    use HasFactory; // <-- Ini baris ajaib yang menyelesaikan error-nya
 
-    // Relasi: Produk ini dimiliki oleh sebuah kategori
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
+    protected $guarded = []; // Tambahan agar kita bebas memasukkan data apa saja
 }

@@ -9,11 +9,9 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        // Memanggil ProductSeeder agar dieksekusi
-        $this->call([
-            ProductSeeder::class,
-        ]);
-    }
+public function run(): void
+{
+    // Memerintahkan factory untuk membuat 50 produk sekaligus
+    \App\Models\Product::factory(50)->create();
+}
 }
