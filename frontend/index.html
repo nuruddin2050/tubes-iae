@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAJAMAS E-Commerce - Enterprise Application Integration Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Application UI -->
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand-section">
+                <div class="brand-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">BAJAMAS</h1>
+                    <span class="brand-subtitle">Integration Portal</span>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li>
+                    <a class="nav-link active" data-view="marketplace">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                        Marketplace
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" data-view="cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        Keranjang
+                        <span class="status-pill status-online cart-badge" style="margin-left: auto; font-size: 0.65rem; padding: 0.15rem 0.45rem;">0</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" data-view="orders">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
+                        Pesanan Saya
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" data-view="notifications">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                        Notifikasi
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" data-view="status">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/></svg>
+                        Status Sistem
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Sidebar Footer User Profile -->
+            <div class="user-widget" id="sidebar-user-widget" style="display: none;">
+                <div class="avatar" id="user-avatar">NB</div>
+                <div class="user-info">
+                    <div class="user-name" id="user-display-name">Nuruddin Bajamas</div>
+                    <div class="user-role" id="user-display-role">customer</div>
+                </div>
+                <button class="logout-btn" id="btn-logout" title="Log Out">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Display Content Area -->
+        <main class="main-content">
+            
+            <!-- VIEW: LANDING / AUTHENTICATION -->
+            <div class="view" id="view-auth">
+                <div class="auth-container">
+                    
+                    <!-- Login Form Card -->
+                    <div class="glass-card auth-card" id="auth-login-card">
+                        <div class="auth-header">
+                            <div class="brand-icon" style="margin: 0 auto 1rem auto;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
+                            <h2>Selamat Datang</h2>
+                            <p class="auth-subtitle">BAJAMAS E-Commerce Integration Portal</p>
+                        </div>
+                        
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label class="form-label" for="login-email">Email Address</label>
+                                <input type="email" id="login-email" class="form-control" placeholder="nama@email.com" required value="user@bajamas.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="login-password">Password</label>
+                                <input type="password" id="login-password" class="form-control" placeholder="••••••••" required value="password123">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="btn-login-submit" style="width: 100%; margin-top: 1rem;">Sign In</button>
+                        </form>
+                        
+                        <div class="auth-switch">
+                            Belum punya akun? <a id="link-goto-register">Daftar Akun Baru</a>
+                        </div>
+                    </div>
+
+                    <!-- Register Form Card -->
+                    <div class="glass-card auth-card" id="auth-register-card" style="display: none;">
+                        <div class="auth-header">
+                            <h2>Daftar Akun</h2>
+                            <p class="auth-subtitle">Hubungkan ke User Database Microservice</p>
+                        </div>
+                        
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label class="form-label" for="register-name">Nama Lengkap</label>
+                                <input type="text" id="register-name" class="form-control" placeholder="Contoh: Muhammad Nuruddin" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="register-email">Email Address</label>
+                                <input type="email" id="register-email" class="form-control" placeholder="nama@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="register-password">Password</label>
+                                <input type="password" id="register-password" class="form-control" placeholder="Minimal 8 karakter" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="register-role">Role Akses</label>
+                                <select id="register-role" class="form-control">
+                                    <option value="customer">Customer</option>
+                                    <option value="admin">Administrator</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="btn-register-submit" style="width: 100%; margin-top: 1rem;">Create Account</button>
+                        </form>
+                        
+                        <div class="auth-switch">
+                            Sudah memiliki akun? <a id="link-goto-login">Sign In</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- VIEW: MARKETPLACE -->
+            <div class="view" id="view-marketplace">
+                <div class="content-header">
+                    <div>
+                        <h2 class="page-title">Marketplace Kemasan</h2>
+                        <p class="page-desc">Katalog kemasan ramah lingkungan biodegradable dan organik.</p>
+                    </div>
+                    <div class="search-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        <input type="text" id="catalog-search" class="form-control" placeholder="Cari kemasan ramah lingkungan...">
+                    </div>
+                </div>
+
+                <div class="catalog-header">
+                    <ul class="filter-pills" id="category-filter-list">
+                        <!-- Filled by App.js -->
+                    </ul>
+                </div>
+
+                <div class="product-grid" id="product-grid">
+                    <!-- Product Cards will be rendered here dynamically -->
+                </div>
+            </div>
+
+            <!-- VIEW: SHOPPING CART -->
+            <div class="view" id="view-cart">
+                <div class="content-header">
+                    <div>
+                        <h2 class="page-title">Keranjang Belanja</h2>
+                        <p class="page-desc">Tinjau ulang kemasan pilihan Anda sebelum diproses oleh Order-Service.</p>
+                    </div>
+                </div>
+
+                <div class="cart-layout">
+                    <div class="cart-items-container" id="cart-items-list">
+                        <!-- Filled by App.js -->
+                    </div>
+                    <div id="cart-summary-panel">
+                        <!-- Filled by App.js -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: PESANAN SAYA (ORDERS HISTORY) -->
+            <div class="view" id="view-orders">
+                <div class="content-header">
+                    <div>
+                        <h2 class="page-title">Riwayat Pesanan</h2>
+                        <p class="page-desc">Pantau status transaksi pemesanan kemasan Anda secara real-time.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card orders-table-card">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Kode Transaksi</th>
+                                <th>Tanggal & Detail Items</th>
+                                <th>Total Pembayaran</th>
+                                <th>Status Order</th>
+                                <th>Aksi / Simulasi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body">
+                            <!-- Filled by App.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIEW: NOTIFIKASI -->
+            <div class="view" id="view-notifications">
+                <div class="content-header">
+                    <div>
+                        <h2 class="page-title">Notifikasi Sistem</h2>
+                        <p class="page-desc">Daftar log notifikasi transaksi yang dipicu oleh aktivitas database.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card notif-list" id="notif-list-container">
+                    <!-- Filled by App.js -->
+                </div>
+            </div>
+
+            <!-- VIEW: STATUS MONITOR -->
+            <div class="view" id="view-status">
+                <div class="content-header">
+                    <div>
+                        <h2 class="page-title">Monitor Arsitektur Sistem</h2>
+                        <p class="page-desc">Visualisasi arsitektur microservices terintegrasi dan Hasura gateway Anda.</p>
+                    </div>
+                </div>
+
+                <div class="monitor-grid">
+                    
+                    <!-- SVG Architecture Diagram Node Map -->
+                    <div class="glass-card monitor-diagram-card">
+                        <h3>Peta Aliran Integrasi Microservices</h3>
+                        <div class="diagram-container">
+                            <svg class="arch-diagram" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Connection Links / Paths -->
+                                <path class="diag-link active" d="M 120 70 L 300 130" /> <!-- Login to Gateway -->
+                                <path class="diag-link active" d="M 120 180 L 300 200" /> <!-- Product to Gateway -->
+                                <path class="diag-link active" d="M 120 290 L 300 270" /> <!-- Order to Gateway -->
+                                <path class="diag-link active" d="M 480 120 L 300 190" /> <!-- Notification to Gateway -->
+                                <path class="diag-link active" d="M 480 270 L 300 210" /> <!-- Payment to Gateway -->
+                                
+                                <!-- Inter-Service Flows (Event bus / RabbitMQ) -->
+                                <path class="diag-link" style="stroke: #ef4444;" d="M 120 290 L 480 270" /> <!-- Order to Payment via Rabbit -->
+
+                                <!-- Nodes: Left Side (Services) -->
+                                <g>
+                                    <rect id="diag-node-login" class="diag-node" x="20" y="40" width="100" height="60" rx="10" />
+                                    <text class="diag-text" x="70" y="75">Login Service</text>
+                                </g>
+                                <g>
+                                    <rect id="diag-node-product" class="diag-node" x="20" y="150" width="100" height="60" rx="10" />
+                                    <text class="diag-text" x="70" y="185">Product Service</text>
+                                </g>
+                                <g>
+                                    <rect id="diag-node-order" class="diag-node" x="20" y="260" width="100" height="60" rx="10" />
+                                    <text class="diag-text" x="70" y="295">Order Service</text>
+                                </g>
+
+                                <!-- Gateway: Center (Hasura) -->
+                                <g>
+                                    <polygon id="diag-node-hasura" class="diag-node gateway" points="300,100 370,200 300,300 230,200" />
+                                    <text class="diag-text" x="300" y="195" style="font-size: 13px;">Hasura</text>
+                                    <text class="diag-text" x="300" y="215" style="font-size: 9px; fill: var(--accent-cyan);">GATEWAY</text>
+                                </g>
+
+                                <!-- Nodes: Right Side (Services) -->
+                                <g>
+                                    <rect id="diag-node-notification" class="diag-node" x="480" y="90" width="100" height="60" rx="10" />
+                                    <text class="diag-text" x="530" y="125">Notification</text>
+                                </g>
+                                <g>
+                                    <rect id="diag-node-payment" class="diag-node" x="480" y="240" width="100" height="60" rx="10" />
+                                    <text class="diag-text" x="530" y="275">Payment</text>
+                                </g>
+
+                                <!-- Legend/Info text -->
+                                <text x="300" y="375" class="diag-text" style="font-size: 10px; fill: var(--color-text-muted);">
+                                    Garis putus-putus menunjukkan jalur integrasi data REST/GraphQL & RabbitMQ
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Config endpoints form panel -->
+                    <div class="glass-card config-card">
+                        <h3>Konfigurasi Endpoint API</h3>
+                        
+                        <div class="toggle-switch-container">
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Mock Mode Failsafe</h4>
+                                <p style="font-size: 0.75rem; color: var(--color-text-muted);">Simulasi data jika microservices sedang offline.</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="mock-mode-checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <form id="config-form">
+                            <div class="form-group">
+                                <label class="form-label">Gateway: Hasura GraphQL URL</label>
+                                <input type="text" id="url-hasura" class="form-control" value="http://localhost:8080/v1/graphql" required>
+                                <div id="badge-hasura-status" class="status-pill" style="margin-top: 0.25rem;">Checking...</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Login Service API Base</label>
+                                <input type="text" id="url-login" class="form-control" value="http://localhost:8000/api" required>
+                                <div id="badge-login-status" class="status-pill" style="margin-top: 0.25rem;">Checking...</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Product Service API Base</label>
+                                <input type="text" id="url-product" class="form-control" value="http://localhost:8001/api" required>
+                                <div id="badge-product-status" class="status-pill" style="margin-top: 0.25rem;">Checking...</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Order Service API Base (REST)</label>
+                                <input type="text" id="url-order" class="form-control" value="http://localhost:8000/api/v1" required>
+                                <div id="badge-order-status" class="status-pill" style="margin-top: 0.25rem;">Checking...</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Notification Service API Base</label>
+                                <input type="text" id="url-notif" class="form-control" value="http://localhost:8003/api" required>
+                                <div id="badge-notif-status" class="status-pill" style="margin-top: 0.25rem;">Checking...</div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Simpan Konfigurasi</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Script imports -->
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

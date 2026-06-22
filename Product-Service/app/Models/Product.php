@@ -10,4 +10,9 @@ class Product extends Model
     use HasFactory; // <-- Ini baris ajaib yang menyelesaikan error-nya
 
     protected $guarded = []; // Tambahan agar kita bebas memasukkan data apa saja
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

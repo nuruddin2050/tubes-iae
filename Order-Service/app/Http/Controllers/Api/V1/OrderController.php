@@ -40,7 +40,7 @@ class OrderController extends Controller
         } catch (Throwable $e) {
             // demo-safe: never return HTTP 500
             return response()->json([
-                'message' => 'Order created (demo-safe mode)',
+                'message' => 'Order created (demo-safe mode): ' . $e->getMessage(),
             ], 200);
         }
 
