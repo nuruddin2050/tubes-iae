@@ -2,20 +2,17 @@
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    "Mengambil semua riwayat notifikasi (Poin 100% skema lengkap)"
     notifications: [Notification!]! @all
-
-    "Mengambil notifikasi berdasarkan User ID tertentu"
     notificationsByUserId(user_id: String! @eq): [Notification!]! @all
 }
 
 type Notification {
     id: ID!
     user_id: String!
-    email: String!
-    type: String!
+    order_id: Int!
+    title: String!
     message: String!
-    status: String!
+    is_read: Boolean!
     created_at: DateTime!
     updated_at: DateTime!
 }
